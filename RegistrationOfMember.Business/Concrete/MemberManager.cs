@@ -28,24 +28,28 @@ namespace RegistrationOfMember.Business.Concrete
         [FluentValidationAspect(typeof(MemberValidator))]
         public void Add(Member member)
         {
+            CheckIfMemberExists(member);
+            CheckIfUserValidFromKps(member);
+        }
+
+        private void CheckIfUserValidFromKps(Member member)
+        {
             if (_kpsService.ValidateUser(member))
             {
-
-                if (_memberDal.Get(m => m.TcNo == member.TcNo) != null)
-                {
-                    throw new Exception("Kullanıcı sisteme daha önce kayıt olmustur.");
-                }
-                else
-                {
-                    _memberDal.Add(member);
-                }
-                
+                _memberDal.Add(member);
             }
             else
             {
                 throw new Exception("Kullanıcı doğrulanamadı.");
             }
-           
+        }
+
+        private void CheckIfMemberExists(Member member)
+        {
+            if (_memberDal.Get(m => m.TcNo == member.TcNo) != null)
+            {
+                throw new Exception("Kullanıcı sisteme daha önce kayıt olmustur..");
+            }
         }
     }
 }
