@@ -30,7 +30,16 @@ namespace RegistrationOfMember.Business.Concrete
         {
             if (_kpsService.ValidateUser(member))
             {
-                _memberDal.Add(member);
+
+                if (_memberDal.Get(m => m.TcNo == member.TcNo) != null)
+                {
+                    throw new Exception("Kullanıcı sisteme daha önce kayıt olmustur.");
+                }
+                else
+                {
+                    _memberDal.Add(member);
+                }
+                
             }
             else
             {
