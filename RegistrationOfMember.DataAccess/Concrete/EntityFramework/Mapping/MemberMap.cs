@@ -14,6 +14,8 @@ namespace RegistrationOfMember.DataAccess.Concrete.EntityFramework.Mapping
         {
             ToTable(@"Members", @"dbo");
             HasKey(x => x.Id);
+            
+            Property(x => x.Id).HasColumnName("Id");
             Property(x => x.DateOfBirth).HasColumnName("DateOfBirth");
             Property(x => x.Email).HasColumnName("Email");
             Property(x => x.FirstName).HasColumnName("FirstName");
