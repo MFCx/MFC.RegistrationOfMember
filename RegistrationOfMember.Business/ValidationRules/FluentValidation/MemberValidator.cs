@@ -12,11 +12,11 @@ namespace RegistrationOfMember.Business.ValidationRules.FluentValidation
     {
         public MemberValidator()
         {
-            RuleFor(m => m.TcNo).Length(11).NotEmpty();
-            RuleFor(m => m.FirstName).NotEmpty();
-            RuleFor(m => m.LastName).NotEmpty();
-            RuleFor(m => m.DateOfBirth).LessThan(DateTime.Now);
-            RuleFor(m => m.Email).EmailAddress();
+            RuleFor(m => m.TcNo).Length(11).NotEmpty().WithMessage("11 haneli TC Kimlik numarası boş geçilemez");
+            RuleFor(m => m.FirstName).NotEmpty().WithMessage("Ad kısmı boş geçilemez");
+            RuleFor(m => m.LastName).NotEmpty().WithMessage("Soyad kısmı boş geçilemez");
+            RuleFor(m => m.DateOfBirth).LessThan(DateTime.Now).WithMessage("Doğum tarihini yanlış girdiniz");
+            RuleFor(m => m.Email).EmailAddress().WithMessage("Geçersiz Email adresi ");
         }
     }
 }
