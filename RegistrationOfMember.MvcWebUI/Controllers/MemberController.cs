@@ -23,13 +23,11 @@ namespace RegistrationOfMember.MvcWebUI.Controllers
         {
             return View(new MemberAddViewModel());
         }
-        
         [HttpPost]
         public ActionResult Add(Member member)
         {
             _memberService.Add(member);
             return View(new MemberAddViewModel());
         }
-
     }
 }
